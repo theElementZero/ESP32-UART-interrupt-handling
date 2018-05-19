@@ -117,13 +117,13 @@ void app_main()
     //Install UART driver, and get the queue.
     ESP_ERROR_CHECK(uart_driver_install(EX_UART_NUM, BUF_SIZE * 2, 0, 0, NULL, 0));
 
-   // release the pre registered UART handler/subroutine
-	 ESP_ERROR_CHECK(uart_isr_free(EX_UART_NUM));
+    // release the pre registered UART handler/subroutine
+    ESP_ERROR_CHECK(uart_isr_free(EX_UART_NUM));
    
-   // register new UART subroutine
-   ESP_ERROR_CHECK(uart_isr_register(EX_UART_NUM,uart_intr_handle, NULL, ESP_INTR_FLAG_IRAM, &handle_console));
+    // register new UART subroutine
+    ESP_ERROR_CHECK(uart_isr_register(EX_UART_NUM,uart_intr_handle, NULL, ESP_INTR_FLAG_IRAM, &handle_console));
 
-   ESP_ERROR_CHECK(uart_enable_rx_intr(EX_UART_NUM));
+    ESP_ERROR_CHECK(uart_enable_rx_intr(EX_UART_NUM));
 #if (NOTASK == 1)
     while(1)
     {
